@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".UserRegistration"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Matdaan"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registration"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/orId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+       android:layout_marginLeft="110dp"
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sign in to your account"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="130dp"
+            android:textColor="@color/blue"
+            android:onClick="userSignIn"
+            />
+
+</RelativeLayout>
+
+
+
+
+
+    <!-- User details  -->
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <!--  fill Details Adhaar Number -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextAdhaar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Aadhaar Number "
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextAdhaar"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterAdhaar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="numberDecimal"
+                                android:textSize="20dp"
+
+                                 />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!---     fill Details Name -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Name"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextName"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="text"
+                                android:textSize="20dp"
+                                 />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!--  Enter father's Name  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextFather"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Father's Name"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                      <!--
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextFather"
+                            android:text="*"
+                            android:textColor="@color/red" />
+                            -->
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterFatherName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="text"
+                                android:textSize="20dp"
+                                 />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Age -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextAge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Date Of Birth"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextAge"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterDob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="date"
+                                android:focusable="false"
+                                android:textSize="20dp"
+
+                                />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!---  Gender     -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Gender"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextGender"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <Spinner
+                                android:id="@+id/enterGenderSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+
+                                android:textSize="35dp"
+
+                                />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- City  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextState"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="State"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextState"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/autoCompleteState"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+
+                                android:completionThreshold="1"
+                                />
+
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- City  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextCity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="City"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextCity"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+
+                            <AutoCompleteTextView
+                                android:id="@+id/autoCompleteCity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+
+                                android:completionThreshold="1"
+                                />
+
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+                <!--  Address -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Address"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    <!--
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextAddress"
+                            android:text="*"
+                            android:textColor="@color/red" />
+                     -->
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="text"
+                                android:textSize="20dp"
+                                 />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- pincode  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="25dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextPincode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Pincode"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextPincode"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterPincode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="numberDecimal"
+                                android:textSize="20dp"
+                                 />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--  Mobile Number -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="25dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextMobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Mobile Number"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextMobile"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="numberDecimal"
+                                android:textSize="20dp" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+                <!--  passward -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/enterTextPassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Password"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/enterTextPassword"
+                            android:text="*"
+                            android:textColor="@color/red" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:padding="8dp"
+                            app:cardBackgroundColor="@color/light_gray"
+                            app:cardCornerRadius="10dp">
+
+                            <EditText
+                                android:id="@+id/enterPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:inputType="text"
+                                android:textSize="20dp"
+                                />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+         <!-- Register Button -->
+                <Button
+                    android:id="@+id/userRegisterBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Register"
+                    android:layout_marginTop="50dp"
+
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:background="@color/blue"
+                    android:padding="15dp"
+                    android:onClick="size"
+
+                    />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/loginAlready"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Already have an account"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="85dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Login "
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="260dp"
+                        android:textColor="@color/blue"
+                        android:onClick="userSignIn"
+                        />
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+

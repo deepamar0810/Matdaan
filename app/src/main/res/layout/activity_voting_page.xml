@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="8dp"
+    android:layout_height="match_parent"
+    tools:context=".VotingPage">
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Matdaan"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_marginTop="40dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <TextView
+
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Election Commission Of India"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:background="@color/flag_orange"
+            android:layout_marginTop="30dp"/>
+        <ImageView
+            android:id="@+id/ashokaLoin"
+            android:layout_marginTop="35dp"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+
+            android:src="@drawable/anthemlogo"/>
+
+
+    </RelativeLayout>
+    <TextView
+        android:textSize="16dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/red"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Note - You can vote only one time"
+        android:layout_marginBottom="30dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Header Tag -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TableRow
+                android:padding="5dp">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/black"
+
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Symbol"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/black"
+
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:text="Party Name"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                  android:layout_marginLeft="93dp"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vote"/>
+
+            </TableRow>
+            <TextView
+
+                android:textColor="@color/black"
+                android:text="----------------------------------------------------------------------------------------------"/>
+        </TableLayout>
+
+            <!-- Party 1 -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TableRow
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+
+                    </RelativeLayout>
+
+                    <ImageView
+
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="Election Symbol"
+                        android:src="@drawable/bjp_symbal"/>
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="35dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:text="Bhartiya Janata Party"/>
+
+
+                    <Button
+
+                        android:id="@+id/party1Btn"
+                        android:elevation="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@color/flag_blue"
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+
+                        android:textSize="12sp"
+                        android:text="Vote"
+                        />
+
+                </TableRow>
+                <TextView
+                    android:text="--------------------------------------------------------------------------------------------------"/>
+            </TableLayout>
+
+            <!-- Party 2 -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TableRow
+                    android:padding="5dp">
+
+                    <ImageView
+
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="Election Symbol"
+                        android:src="@drawable/india_alliance"/>
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="35dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:text="India Alliance"/>
+
+                    <Button
+                        android:id="@+id/party2Btn"
+                        android:elevation="10dp"
+                        android:layout_marginLeft="94dp"
+                        android:background="@color/flag_blue"
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+
+                        android:text="Vote"
+                       />
+
+                </TableRow>
+                <TextView
+                    android:text="--------------------------------------------------------------------------------------------------"/>
+            </TableLayout>
+
+            <!-- party  3 -->
+            <!-- Party 1 -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TableRow
+                    android:padding="5dp">
+
+                    <ImageView
+
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="Election Symbol"
+                        android:src="@drawable/tda_logo"/>
+                    <TextView
+                        android:layout_marginLeft="35dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:text="TheDeepAmar"/>
+
+                    <Button
+                        android:id="@+id/party3Btn"
+                        android:layout_marginLeft="89dp"
+                        android:background="@color/flag_blue"
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                       android:elevation="10dp"
+                        android:textSize="12sp"
+                        android:text="Vote"
+                       />
+
+                </TableRow>
+                <TextView
+                    android:text="--------------------------------------------------------------------------------------------------"/>
+            </TableLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Think Twice, Vote Wise"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:background="@color/flag_green"
+            android:layout_marginTop="75dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

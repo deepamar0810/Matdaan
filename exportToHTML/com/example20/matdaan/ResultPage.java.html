@@ -1,0 +1,406 @@
+<html>
+<head>
+<title>ResultPage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ResultPage.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example20</span><span class="s2">.</span><span class="s1">matdaan</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">SuppressLint</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Activity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">Cursor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">sqlite</span><span class="s2">.</span><span class="s1">SQLiteDatabase</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ProgressBar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">EdgeToEdge</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Insets</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">ViewCompat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">WindowInsetsCompat</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ResultPage </span><span class="s0">extends </span><span class="s1">Activity </span><span class="s2">{</span>
+
+    <span class="s1">SQLiteDatabase db</span><span class="s2">;</span>
+    <span class="s1">TextView totalVote</span><span class="s2">,</span><span class="s1">party1Count</span><span class="s2">,</span><span class="s1">party2Count</span><span class="s2">,</span><span class="s1">party3Count</span><span class="s2">;</span>
+    <span class="s1">TextView winnerTextView</span><span class="s2">,</span><span class="s1">runnerUpTextView</span><span class="s2">;</span>
+    <span class="s1">TextView femaleVoters</span><span class="s2">,</span><span class="s1">maleVoters</span><span class="s2">;</span>
+    <span class="s1">ProgressBar femaleProgressBar</span><span class="s2">,</span><span class="s1">maleProgressBar</span><span class="s2">,</span><span class="s1">totalVoteProgessBar</span><span class="s2">;</span>
+    <span class="s0">int </span><span class="s1">maleVotePercent</span><span class="s2">,</span><span class="s1">femaleVotePercent</span><span class="s2">;</span>
+    <span class="s1">@SuppressLint</span><span class="s2">(</span><span class="s3">&quot;MissingInflatedId&quot;</span><span class="s2">)</span>
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_result_page</span><span class="s2">);</span>
+
+        <span class="s1">idFind</span><span class="s2">();</span>
+    <span class="s4">//Progress bar</span>
+
+      <span class="s4">/*  Thread t=new Thread(new Runnable() { 
+            @Override 
+            public void run() { 
+                for(int i=1; i&lt;=10;i++) 
+                { 
+                    try 
+                    { 
+                        Thread.sleep(1000); 
+                    } 
+                    catch (InterruptedException e) 
+                    { 
+                        System.out.println(e); 
+                    } 
+ 
+ 
+                } 
+              //  Intent i =new Intent(processBar.this, AutoComp.class); 
+               // startActivity(i); 
+            } 
+ 
+        }); 
+        t.start();*/</span>
+
+
+        <span class="s1">fetchingValuesFromDatabase</span><span class="s2">();</span>
+        <span class="s1">setDataToLayut</span><span class="s2">();</span>
+        <span class="s1">checkWinnerAndRunnerUp</span><span class="s2">();</span>
+        <span class="s1">setUpProgressBar</span><span class="s2">();</span>
+
+
+
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">nextActivity</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">Intent i </span><span class="s2">=</span><span class="s0">new </span><span class="s1">Intent</span><span class="s2">(</span><span class="s1">ResultPage</span><span class="s2">.</span><span class="s0">this</span><span class="s2">,</span><span class="s1">UserLoginPage</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+        <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+        <span class="s1">finish</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">setUpProgressBar</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">femaleProgressBar</span><span class="s2">.</span><span class="s1">setProgress</span><span class="s2">(</span><span class="s1">femaleVotesCountInt</span><span class="s2">);</span>
+        <span class="s1">femaleProgressBar</span><span class="s2">.</span><span class="s1">setMax</span><span class="s2">(</span><span class="s1">totalVotesCountInt</span><span class="s2">);</span>
+        <span class="s1">maleProgressBar</span><span class="s2">.</span><span class="s1">setProgress</span><span class="s2">(</span><span class="s1">maleVotesCountInt</span><span class="s2">);</span>
+        <span class="s1">maleProgressBar</span><span class="s2">.</span><span class="s1">setMax</span><span class="s2">(</span><span class="s1">totalVotesCountInt</span><span class="s2">);</span>
+     <span class="s4">//   totalVoteProgessBar.setProgress(totalVotesCountInt);</span>
+     <span class="s4">//   totalVoteProgessBar.setMax(totalVotesCountInt);</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">checkWinnerAndRunnerUp</span><span class="s2">()</span>
+    <span class="s2">{</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">==</span><span class="s1">party2VoteCount </span><span class="s2">|| </span><span class="s1">party1VoteCount</span><span class="s2">==</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">==</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between BJP And TDA&quot;</span><span class="s2">);</span>
+
+            <span class="s2">}</span>
+            <span class="s0">else</span>
+            <span class="s2">{</span>
+                <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between BJP And I.N.D.I.A &quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">else if </span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">==</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between I.N.D.I.A And TDA &quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">party1VoteCount </span><span class="s2">&gt;</span><span class="s1">party2VoteCount</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">&gt;</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+            <span class="s2">{</span>
+
+                <span class="s0">if</span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">==</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between I.N.D.I.A And TDA &quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">&gt;</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;I.N.D.I.A&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">if</span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">==</span><span class="s1">party3VoteCount</span><span class="s2">) {</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between BJP And TDA&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;I.N.D.I.A&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">else</span>
+        <span class="s2">{</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">&gt;</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s0">if</span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">==</span><span class="s1">party2VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between BJP And I.N.D.I.A &quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">&gt;</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;I.N.D.I.A&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else</span>
+                <span class="s2">{</span>
+                   <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;I.N.D.I.A&quot;</span><span class="s2">);</span>
+                   <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+
+
+            <span class="s2">}</span>
+            <span class="s0">else</span>
+            <span class="s2">{</span>
+                <span class="s0">if</span><span class="s2">(</span><span class="s1">party3VoteCount</span><span class="s2">==</span><span class="s1">party1VoteCount </span><span class="s2">&amp;&amp; </span><span class="s1">party3VoteCount</span><span class="s2">==</span><span class="s1">party2VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tied&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;No One&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">party1VoteCount </span><span class="s2">==</span><span class="s1">party2VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between BJP And I.N.D.I.A &quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">==</span><span class="s1">party3VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Tie Between I.N.D.I.A And TDA&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+
+                <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">&gt;</span><span class="s1">party1VoteCount</span><span class="s2">)</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;I.N.D.I.A&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s0">else</span>
+                <span class="s2">{</span>
+                    <span class="s1">winnerTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;TDA&quot;</span><span class="s2">);</span>
+                    <span class="s1">runnerUpTextView</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;BJP&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+      <span class="s4">//another logic</span>
+      <span class="s4">/*  int []a={party1VoteCount,party2VoteCount,party3VoteCount}; 
+        int max=a[0]; 
+        int index=0; 
+        for(int i=1; i&lt;3; i++) 
+        { 
+            if(a[i] &gt;max) 
+            { 
+                index=i; 
+                max=a[i]; 
+            } 
+        } 
+        if(max==a[0] &amp;&amp; max==a[1] &amp;&amp; max==a[2] ) 
+        { 
+            //System.out.println(&quot;Draw a b c&quot;); 
+            winnerTextView.setText(&quot;Draw : BJP , I.N.D.I.A , TDA&quot;); 
+            runnerUpTextView.setText(&quot;No one&quot;); 
+        } 
+        else if( max==a[0] &amp;&amp; max==a[1]) 
+        { 
+            //  System.out.println(&quot;Draw a b&quot;); 
+            winnerTextView.setText(&quot;Draw : BJP , I.N.D.I.A&quot;); 
+            runnerUpTextView.setText(&quot;TDA&quot;); 
+        } 
+        else if( max==a[0] &amp;&amp; max==a[2]) 
+        { 
+            // System.out.println(&quot;Draw a c &quot;); 
+            winnerTextView.setText(&quot;Draw : BJP , TDA&quot;); 
+            runnerUpTextView.setText(&quot;I.N.D.I.A&quot;); 
+        } 
+        else if( max==a[1] &amp;&amp; max==a[2]) 
+        { 
+            // System.out.println(&quot;Draw b c &quot;); 
+            winnerTextView.setText(&quot;Draw : I.N.D.I.A , TDA&quot;); 
+            runnerUpTextView.setText(&quot;BJP&quot;); 
+        } 
+        else 
+        { 
+            if(index==0) 
+            { 
+                //party1 
+                winnerTextView.setText(&quot;BJP&quot;); 
+                if(a[1]&gt;a[2]) 
+                { 
+                    runnerUpTextView.setText(&quot;I.N.D.I.A&quot;); 
+                }else if (a[1]==a[2]) { 
+                    runnerUpTextView.setText(&quot;Draw : I.N.D.I.A ,TDA&quot;); 
+                } 
+                else { 
+                    runnerUpTextView.setText(&quot;TDA&quot;); 
+                } 
+            } else if (index ==1) { 
+                //party2 
+                winnerTextView.setText(&quot;I.N.D.I.A&quot;); 
+                if(a[0]&gt;a[2]) 
+                { 
+                    runnerUpTextView.setText(&quot;BJP&quot;); 
+                }else if (a[1]==a[2]) { 
+                    runnerUpTextView.setText(&quot;Draw : I.N.D.I.A , TDA&quot;); 
+                } 
+                else { 
+                    runnerUpTextView.setText(&quot;TDA&quot;); 
+                } 
+            } 
+            else { 
+                //party3 
+                winnerTextView.setText(&quot;TDA&quot;); 
+                if(a[0]&gt;a[1]) 
+                { 
+                    runnerUpTextView.setText(&quot;BJP&quot;); 
+                } else if (a[0]==a[1]) { 
+                    runnerUpTextView.setText(&quot;Draw : BJP , I.N.D.I.A&quot;); 
+                } else { 
+                    runnerUpTextView.setText(&quot;I.N.D.I.A&quot;); 
+                } 
+            } 
+        }*/</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">fetchingValuesFromDatabase</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">db</span><span class="s2">=</span><span class="s1">openOrCreateDatabase</span><span class="s2">(</span><span class="s3">&quot;VotersData.sql&quot;</span><span class="s2">,</span><span class="s1">MODE_PRIVATE</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s4">//Total Voters Count</span>
+        <span class="s1">Cursor c</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">rawQuery</span><span class="s2">(</span><span class="s3">&quot;SELECT COUNT(*) FROM voterDetails &quot;</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()) {</span>
+
+          <span class="s1">totalVotesCountInt </span><span class="s2">= </span><span class="s1">c</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+          <span class="s1">totalVotersCount</span><span class="s2">=</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">totalVotesCountInt</span><span class="s2">);</span>
+          <span class="s4">//  Toast.makeText(ResultPage.this, &quot;Total Votes &quot; + totalVoteCount, Toast.LENGTH_SHORT).show();</span>
+        <span class="s2">}</span>
+
+        <span class="s4">//party1 couting</span>
+       <span class="s1">Cursor cParty1</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">rawQuery</span><span class="s2">(</span><span class="s3">&quot;SELECT COUNT(*) FROM firstParty &quot;</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">cParty1</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()) {</span>
+            <span class="s1">party1VoteCount </span><span class="s2">= </span><span class="s1">cParty1</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+     <span class="s4">//       Toast.makeText(ResultPage.this, &quot;Total Votes party1&quot; + party1VoteCount, Toast.LENGTH_SHORT).show();</span>
+        <span class="s2">}</span>
+
+
+        <span class="s4">//party2 counting</span>
+        <span class="s1">Cursor cParty2</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">rawQuery</span><span class="s2">(</span><span class="s3">&quot;SELECT COUNT(*) FROM secondParty &quot;</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">cParty2</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()) {</span>
+            <span class="s1">party2VoteCount </span><span class="s2">= </span><span class="s1">cParty2</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+           <span class="s4">// Toast.makeText(ResultPage.this, &quot;Total Votes party2&quot; + party2VoteCount, Toast.LENGTH_SHORT).show();</span>
+        <span class="s2">}</span>
+
+
+        <span class="s4">//party3 counting</span>
+        <span class="s1">Cursor cParty3</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">rawQuery</span><span class="s2">(</span><span class="s3">&quot;SELECT COUNT(*) FROM thirdParty &quot;</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">cParty3</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()) {</span>
+            <span class="s1">party3VoteCount </span><span class="s2">= </span><span class="s1">cParty3</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+         <span class="s4">//  Toast.makeText(ResultPage.this, &quot;Total Votes party3&quot; + party3VoteCount, Toast.LENGTH_SHORT).show();</span>
+        <span class="s2">}</span>
+
+
+        <span class="s4">//sax ratio finding</span>
+       <span class="s1">Cursor cMale</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">rawQuery</span><span class="s2">(</span><span class="s3">&quot;SELECT COUNT(gender) FROM voterDetails WHERE gender='Male'&quot;</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">cMale</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">())</span>
+        <span class="s2">{</span>
+            <span class="s1">maleVotesCountInt</span><span class="s2">=</span><span class="s1">cMale</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+           <span class="s1">maleVotesCount</span><span class="s2">=</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">maleVotesCountInt</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">Cursor cFemale</span><span class="s2">=</span><span class="s1">db</span><span class="s2">.</span><span class="s1">rawQuery</span><span class="s2">(</span><span class="s3">&quot;SELECT Count(gender) FROM voterDetails  WHERE gender='Female' &quot;</span><span class="s2">,</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">cFemale</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">())</span>
+        <span class="s2">{</span>
+            <span class="s1">femaleVotesCountInt</span><span class="s2">=</span><span class="s1">cFemale</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+            <span class="s1">femaleVotesCount</span><span class="s2">=</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">femaleVotesCountInt</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+
+    <span class="s2">}</span>
+    <span class="s0">int </span><span class="s1">totalVotesCountInt</span><span class="s2">,</span><span class="s1">femaleVotesCountInt</span><span class="s2">,</span><span class="s1">maleVotesCountInt</span><span class="s2">;</span>
+    <span class="s0">int </span><span class="s1">party1VoteCount</span><span class="s2">,</span><span class="s1">party2VoteCount</span><span class="s2">,</span><span class="s1">party3VoteCount</span><span class="s2">;</span>
+    <span class="s1">String maleVotesCount</span><span class="s2">,</span><span class="s1">femaleVotesCount</span><span class="s2">,</span><span class="s1">totalVotersCount</span><span class="s2">;</span>
+
+
+    <span class="s0">public void </span><span class="s1">setDataToLayut</span><span class="s2">()</span>
+    <span class="s2">{</span>
+       <span class="s1">String party1VoteInString</span><span class="s2">,</span><span class="s1">party2VoteInString</span><span class="s2">,</span><span class="s1">party3VoteInString</span><span class="s2">;</span>
+
+
+        <span class="s1">party1VoteInString</span><span class="s2">=</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">party1VoteCount</span><span class="s2">);</span>
+        <span class="s1">party2VoteInString</span><span class="s2">=</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">party2VoteCount</span><span class="s2">);</span>
+        <span class="s1">party3VoteInString</span><span class="s2">=</span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">party3VoteCount</span><span class="s2">);</span>
+
+        <span class="s1">totalVote</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">totalVotersCount</span><span class="s2">);</span>
+        <span class="s1">party1Count</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">party1VoteInString</span><span class="s2">);</span>
+        <span class="s1">party2Count</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">party2VoteInString</span><span class="s2">);</span>
+        <span class="s1">party3Count</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">party3VoteInString</span><span class="s2">);</span>
+
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s4">//Votes in percentage</span>
+            <span class="s1">maleVotePercent </span><span class="s2">= </span><span class="s1">maleVotesCountInt </span><span class="s2">* </span><span class="s5">100 </span><span class="s2">/ </span><span class="s1">totalVotesCountInt</span><span class="s2">;</span>
+            <span class="s1">femaleVotePercent </span><span class="s2">= </span><span class="s1">femaleVotesCountInt </span><span class="s2">* </span><span class="s5">100 </span><span class="s2">/ </span><span class="s1">totalVotesCountInt</span><span class="s2">;</span>
+           <span class="s1">CharSequence femalePercentage </span><span class="s2">= </span><span class="s1">femaleVotePercent </span><span class="s2">+ </span><span class="s3">&quot;%&quot;</span><span class="s2">;</span>
+           <span class="s1">CharSequence malePercentage </span><span class="s2">= </span><span class="s1">maleVotePercent </span><span class="s2">+ </span><span class="s3">&quot;%&quot;</span><span class="s2">;</span>
+            <span class="s1">femaleVoters</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">femalePercentage</span><span class="s2">);</span>
+            <span class="s1">maleVoters</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">malePercentage</span><span class="s2">);</span>
+        <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s1">femaleVoters</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;0%&quot;</span><span class="s2">);</span>
+            <span class="s1">maleVoters</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;0%&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+
+
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">idFind</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">totalVote</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">totalVote</span><span class="s2">);</span>
+        <span class="s1">party1Count</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">party1Count</span><span class="s2">);</span>
+        <span class="s1">party2Count</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">party2Count</span><span class="s2">);</span>
+        <span class="s1">party3Count</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">party3Count</span><span class="s2">);</span>
+
+        <span class="s1">winnerTextView</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">winnerTextView</span><span class="s2">);</span>
+        <span class="s1">runnerUpTextView</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">runnerUpTextView</span><span class="s2">);</span>
+
+
+
+        <span class="s1">femaleVoters</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">femaleVoters</span><span class="s2">);</span>
+        <span class="s1">maleVoters</span><span class="s2">=(</span><span class="s1">TextView</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">maleVoters</span><span class="s2">);</span>
+
+
+        <span class="s4">//ProgessBar</span>
+        <span class="s1">femaleProgressBar</span><span class="s2">=(</span><span class="s1">ProgressBar</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">femaleProgressBar</span><span class="s2">);</span>
+        <span class="s1">maleProgressBar</span><span class="s2">=(</span><span class="s1">ProgressBar</span><span class="s2">) </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">maleProgressBar</span><span class="s2">);</span>
+      <span class="s4">//  totalVoteProgessBar=(ProgressBar) findViewById(R.id.totalVoteProgressBar);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBackPressed</span><span class="s2">() {</span>
+        <span class="s1">nextActivity</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

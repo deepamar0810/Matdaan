@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserLoginPage"
+    android:background="@color/white"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:layout_marginTop="25dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Matdaan"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/orId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="or"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="110dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="signup to your account"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="130dp"
+            android:textColor="@color/blue"
+            android:onClick="userSignUp"
+            />
+
+    </RelativeLayout>
+
+ <!--   Adhaar number field  -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+
+        <TextView
+            android:id="@+id/enterTextAdhaar"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Aadhaar Number "
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/enterTextAdhaar"
+            android:text="*"
+            android:textColor="@color/red" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:padding="8dp"
+            app:cardBackgroundColor="@color/light_gray"
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/enterAdhaarNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="numberDecimal"
+                android:textSize="20dp"
+                />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+ <!-- Password field  -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/enterTextPincode"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Password"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/enterTextPincode"
+            android:text="*"
+            android:textColor="@color/red" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:padding="8dp"
+            app:cardBackgroundColor="@color/light_gray"
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/enterPasswordToLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text"
+                android:textSize="20dp"
+              />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+<!-- Login Button -->
+    <Button
+        android:id="@+id/userLoginBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:background="@color/blue"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:padding="15dp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/orId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="85dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Signup "
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:textSize="15dp"
+            android:layout_marginLeft="240dp"
+            android:textColor="@color/blue"
+            android:onClick="userSignUp"
+            />
+    </RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="330dp"
+        android:onClick="electionCommissionLogin"
+        android:text="Election Commission Login"
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        />
+</LinearLayout>
+
+</LinearLayout>
